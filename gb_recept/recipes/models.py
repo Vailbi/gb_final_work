@@ -1,6 +1,7 @@
 from django.db import models
 from pytils.translit import slugify
 
+
 # Create your models here.
 
 class PublishedManager(models.Manager):
@@ -20,7 +21,7 @@ class Recipes(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название рецепта')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='Slug')
     content = models.TextField(blank=True, verbose_name='Описание рецепта')
-    steps = models.CharField(max_length=255, verbose_name='Шаги приготовления')
+    steps = models.TextField(blank=True, verbose_name='Шаги приготовления')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     time_update = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
     is_published = models.IntegerField(choices=Status.choices, default=Status.DRAFT, verbose_name='Статус')
@@ -38,7 +39,7 @@ class Recipes(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        return super().save(*args,**kwargs)
+        return super().save(*args, **kwargs)
 
 
 class Category(models.Model):
@@ -54,7 +55,7 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        return super().save(*args,**kwargs)
+        return super().save(*args, **kwargs)
 
 
 class Tags(models.Model):
@@ -70,4 +71,4 @@ class Tags(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        return super().save(*args,**kwargs)
+        return super().save(*args, **kwargs)
