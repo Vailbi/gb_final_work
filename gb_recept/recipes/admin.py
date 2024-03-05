@@ -4,7 +4,7 @@ from .models import Recipes, Tags, Category
 
 @admin.register(Recipes)
 class RecipesAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
+    prepopulated_fields = {"slug": ("title",)}
 
 
 
@@ -15,4 +15,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Tags)
 class TagsAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("title",)}
+    prepopulated_fields = {"slug": ("name",)}

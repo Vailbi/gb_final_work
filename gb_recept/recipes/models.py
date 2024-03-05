@@ -28,7 +28,7 @@ class Recipes(models.Model):
     cat = models.ForeignKey('Category', on_delete=models.PROTECT, related_name='recipe',
                             verbose_name='Категории')
     tags = models.ManyToManyField('Tags', blank=True, related_name='tags', verbose_name='Тэги')
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d', default=None, null=True, blank=True,
+    photo = models.ImageField(upload_to='pictures/%Y/%m/%d', default=None, null=True, blank=True,
                               verbose_name='Фото')
 
     objects = models.Manager()
