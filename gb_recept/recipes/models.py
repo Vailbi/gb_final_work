@@ -51,8 +51,8 @@ class Category(models.Model):
 
 class Tags(models.Model):
     class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        verbose_name = 'Тэг'
+        verbose_name_plural = 'Тэги'
 
     name = models.CharField(max_length=100, db_index=True, verbose_name='Тэги')
     slug = models.CharField(max_length=100, unique=True, db_index=True)
