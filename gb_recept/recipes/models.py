@@ -1,5 +1,5 @@
 from django.db import models
-
+from pytils.translit import slugify
 
 # Create your models here.
 
@@ -36,6 +36,10 @@ class Recipes(models.Model):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        return super().save(*args,**kwargs)
+
 
 class Category(models.Model):
     class Meta:
@@ -48,6 +52,10 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        return super().save(*args,**kwargs)
+
 
 class Tags(models.Model):
     class Meta:
@@ -59,3 +67,7 @@ class Tags(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        return super().save(*args,**kwargs)
