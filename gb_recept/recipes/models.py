@@ -24,9 +24,9 @@ class Recipes(models.Model):
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     time_update = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
     is_published = models.IntegerField(choices=Status.choices, default=Status.DRAFT, verbose_name='Статус')
-    cat = models.ForeignKey('Category', on_delete=models.PROTECT, related_name='posts',
+    cat = models.ForeignKey('Category', on_delete=models.PROTECT, related_name='recipe',
                             verbose_name='Категории')
-    tags = models.ManyToManyField('TagPost', blank=True, related_name='tags', verbose_name='Тэги')
+    tags = models.ManyToManyField('Tags', blank=True, related_name='tags', verbose_name='Тэги')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d', default=None, null=True, blank=True,
                               verbose_name='Фото')
 
@@ -44,3 +44,18 @@ class Category(models.Model):
 
     name = models.CharField(max_length=100, db_index=True, verbose_name='Категория')
     slug = models.CharField(max_length=100, unique=True, db_index=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Tags(models.Model):
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
+    name = models.CharField(max_length=100, db_index=True, verbose_name='Тэги')
+    slug = models.CharField(max_length=100, unique=True, db_index=True)
+
+    def __str__(self):
+        return self.name
