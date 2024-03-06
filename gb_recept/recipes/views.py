@@ -5,6 +5,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView
 
+from recipes.models import Recipes, Category, Tags
+
 
 def index(request):
-    return render(request, 'recipes/index.html')
+    data = Recipes.objects.all()
+    category = Category.objects.all()
+    tags = Tags.objects.all()
+
+    return render(request, 'recipes/index.html', {'data':data,
+                                                  'cat': category,
+                                                  'tags': tags})

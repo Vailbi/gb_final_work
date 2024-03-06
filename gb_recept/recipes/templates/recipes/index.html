@@ -5,8 +5,41 @@
     <title>Главная страница</title>
 </head>
 <body>
-<h1>
-    Проверка работы шаблона
-</h1>
+<h1>Проверка работы шаблона</h1>
+<h2>Рецепты</h2>
+    <ul>
+    {% for i in data %}
+        Название:
+        <li>
+            <div>
+                 <p>{{i.title}}</p>
+            <hr> Описание:
+              <p>{{i.content}}</p>
+            <hr> Шаги приготовления:
+                <p>{{i.steps}}</p>
+                <hr>
+            </div></li>
+
+    {% endfor %}
+    </ul>
+<h2>Категории</h2>
+<ul>
+    {% for i in cat %}
+
+        <li>{{i}}
+</li>
+
+    {% endfor %}
+</ul>
+<h2>Tэги</h2>
+<ul>
+    {% for i in tags %}
+
+        <li>{{i}}
+</li>
+
+    {% endfor %}
+</ul>
+
 </body>
 </html>
