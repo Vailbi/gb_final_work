@@ -23,6 +23,7 @@ class Recipes(models.Model):
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='Slug')
     content = models.TextField(blank=True, verbose_name='Описание рецепта')
     steps = models.TextField(blank=True, verbose_name='Шаги приготовления')
+    cooking_time = models.PositiveIntegerField(blank=True,null=True, verbose_name='Время приготовления')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     time_update = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
     is_published = models.IntegerField(choices=Status.choices, default=Status.DRAFT, verbose_name='Статус')

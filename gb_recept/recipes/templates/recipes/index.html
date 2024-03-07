@@ -19,6 +19,7 @@
         {% for i in tags %}
         <li>{{i}}</li>
         {% endfor %}
+            <hr>
 </ul>
     </div>
     <div>
@@ -48,6 +49,9 @@
                   <p>{{i.content}}</p>
                 <hr> Шаги приготовления:
                     <p>{{i.steps}}</p>
+                    <hr>
+                    <hr> Время приготовления:
+                    <p>{{i.cooking_time}} минут</p>
                     <hr>
                 </div></li>
 
