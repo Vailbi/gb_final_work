@@ -6,6 +6,7 @@
 </head>
 <body>
 <div class="p-3 d-flex" style="column-gap: 10px">
+
     <div>
         <h2>Категории</h2>
         <ul>
@@ -13,7 +14,6 @@
             <li>{{i}}</li>
             {% endfor %}
         </ul>
-
            <h2>Tэги</h2>
         <ul>
         {% for i in tags %}
@@ -28,7 +28,7 @@
         <p><a href="/users/login/">Войти на сайт</a> </p>
         {% endif %}
     </div>
-    <p>User: {{ user.username }}</p>
+    <p>User: <a href="{% url 'users:profile' %}">{{ user.username }}</a></p>
     <hr>
     <div>
         {% if not user.is_authenticated %}
