@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from pytils.translit import slugify
 
@@ -30,7 +31,8 @@ class Recipes(models.Model):
     tags = models.ManyToManyField('Tags', blank=True, related_name='tags', verbose_name='Тэги')
     photo = models.ImageField(upload_to='pictures/%Y/%m/%d', default=None, null=True, blank=True,
                               verbose_name='Фото')
-
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='recipe', null=True,
+                               default=None)
     objects = models.Manager()
     published = PublishedManager()
 
