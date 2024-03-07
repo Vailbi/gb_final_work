@@ -29,7 +29,13 @@
         {% endif %}
     </div>
     <p>User: {{ user.username }}</p>
+    <hr>
     <div>
+        {% if not user.is_authenticated %}
+        <div>
+            <p><a href="{% url 'users:register' %}">Регистрация</a></p>
+        </div>
+        {% endif %}
          <h1>Проверка работы шаблона</h1>
         <h2>Рецепты</h2>
         <ul class="text-primary">
