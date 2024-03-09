@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.urls import reverse
 from pytils.translit import slugify
 
 
@@ -75,3 +76,6 @@ class Tags(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
+
+    # def get_absolute_url(self):
+    #     return reverse('tag', kwargs={'tag_slug': self.slug})

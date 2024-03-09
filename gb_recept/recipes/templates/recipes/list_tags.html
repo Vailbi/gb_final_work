@@ -1,0 +1,9 @@
+{% if tags %}
+    <p>Теги:</p>
+    <ul class="tags-list">
+        {% for t in tags %}
+<!--        Временнно стоят заглушки на домашнюю страницу-->
+        <li><a href="{% url 'home' %}">{{t.name}}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}

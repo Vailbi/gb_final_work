@@ -1,0 +1,44 @@
+<!--{% extends 'base.html' %}-->
+{% load recipes_tags %}
+
+{% block breadcrumbs %}
+<!-- Теги -->
+<!--Тут надо из бд по рецепту выдать все теги которые с ним связаны-->
+{% with posts.tags.all as tags %}
+    {% if tags %}
+    <ul class="tags-list">
+        <li>Теги:</li>
+        {% for t in tags %}
+            <li><a href="{% url 'home' %}">{{t.tag}}</a></li>
+<!--        {{t.get_absolute_url}}-->
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endwith %}
+{% endblock %}
+
+{% block content %}
+<!--<h1>{{posts.title}}</h1>-->
+<!--Автор: {{posts.author.username|default:"неизвестен"}}-->
+{% if posts.photo %}
+<p><img class="img-article-left" src="{{ posts.photo.url }}" alt="img"></p>
+{% endif %}
+
+{{posts.content|linebreaks}}
+<hr>
+{{posts.steps|linebreaks}}
+<hr>
+Время приготовления: {{posts.cooking_time|linebreaks}} мин.
+
+<!--{% if user.is_authenticated and posts.author.username == user.username %}-->
+<!--<hr>-->
+<!--<p class="link-read-post"><a href="/update/{{ posts.slug }}/">Изменить пост</a></p>-->
+<!--<hr>-->
+<!--<p class="link-read-post"><a href="/del/{{ posts.slug }}/">Удалить пост</a></p>-->
+<!--{% elif user.is_authenticated and user.is_superuser %}-->
+<!--<hr>-->
+<!--<p class="link-read-post"><a href="/update/{{ posts.slug }}/">Изменить пост</a></p>-->
+<!--<hr>-->
+<!--<p class="link-read-post"><a href="/del/{{ posts.slug }}/">Удалить пост</a></p>-->
+{% endif %}
+{% endblock %}

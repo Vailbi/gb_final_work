@@ -1,0 +1,9 @@
+{%for cat in cats %}
+
+<!--{% if cat.id == cat_selected %}-->
+<!--<li class="selected">{{cat.name}}</li>-->
+<!--{% else %}-->
+<!--        Временнно стоят заглушки на домашнюю страницу ({{ cat.get_absolut_url }})  -->
+<li><a href="{% url 'home'%}">{{cat.name}}</a></li>
+{% endif %}
+{% endfor %}
