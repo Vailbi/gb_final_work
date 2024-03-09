@@ -5,18 +5,16 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
+from recipes.models import Recipes
 from users.forms import LoginUserForm, RegisterUserForm, ProfileUserForm
 
 
-# Create your views here.
-
-
 class LoginUser(LoginView):
-
     form_class = LoginUserForm
     template_name = 'users/login.html'
     extra_context = {'title': 'Авторизация'}
     success_url = reverse_lazy('home')
+
 
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
@@ -38,3 +36,17 @@ class ProfileUser(LoginRequiredMixin, UpdateView):
         """ Теперь профайл будет открываться только для текущего пользователя,
         либо сделано перенаправление на страницу авторизации для неавторизованных пользователей. """
         return self.request.user
+
+
+class AddRecipe(CreateView):
+    model = Recipes
+    fields = ['title', 'content', 'steps', 'cooking_time', 'is_published', 'cat', 'tags', 'photo']
+    template_name = 'users/addrecipe.html'
+    success_url = reverse_lazy('home')
+
+
+    def form_valid(self, form):
+        '''Проверка и сохранения автора-юзера в модель Women'''
+        w = form.save(commit=False)
+        w.author = self.request.user
+        return super().form_valid(form)
