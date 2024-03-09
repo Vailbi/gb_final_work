@@ -38,7 +38,7 @@ class ProfileUser(LoginRequiredMixin, UpdateView):
         return self.request.user
 
 
-class AddRecipe(CreateView):
+class AddRecipe(LoginRequiredMixin, CreateView):
     model = Recipes
     fields = ['title', 'content', 'steps', 'cooking_time', 'is_published', 'cat', 'tags', 'photo']
     template_name = 'users/addrecipe.html'
