@@ -33,4 +33,10 @@ class ShowPost(DetailView):
 
 
 class ShowCat(ListView):
-    pass
+    model = Category
+    template_name = 'recipes/showcat.html'
+    context_object_name = 'posts'
+    allow_empty = True
+
+    def get_queryset(self):
+        return Recipes.published.filter(cat__slug=self.kwargs['slug']).select_related('cat')
