@@ -1,5 +1,7 @@
+{% extends 'test.html' %}
 {% load recipes_tags %}
-{% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,63 +10,86 @@
 </head>
 <body>
 <div class="p-3 d-flex" style="column-gap: 10px">
+{% block content %}
+<ul class="list-articles">
+	{% for p in posts %}
 
-    <div>
-        <h2>Категории</h2>
-        <ul>
-            {% for i in cat %}
-            <li>{{i}}</li>
-            {% endfor %}
-        </ul>
-           <h2>Tэги</h2>
-        <ul>
-        {% for i in tags %}
-        <li>{{i}}</li>
-        {% endfor %}
-            <hr>
+	<div class="article-panel">
+         <p class="first">Категория: {{p.cat.name}} | автор: {{p.author.username|default:"неизвестен"}}</p>
+         <p class="last">Дата: {{p.time_update|date:"d-m-Y H:i:s"}}</p>
+	</div>
+			<li><h2>{{p.title}}</h2>
+
+    {% autoescape off %}
+	{% if p.photo %}
+		<p><img class="img-article-left thumb" src="{{ p.photo.url }}" alt="img"></p>
+	{% endif %}
+	{{p.content|linebreaks|truncatewords:40}}
+
+    {% endautoescape %}
+			<div class="clear"></div>
+			<p class="link-read-post"><a href="{{ p.get_absolute_url }}">Смотреть рецепт</a></p>
+			</li>
+	{% endfor %}
 </ul>
-    </div>
-    <div>
-        {% if user.is_authenticated %}
-        <p><a href="/users/logout/">Выйти</a> </p>
-        {% else %}
-        <p><a href="/users/login/">Войти на сайт</a> </p>
-        {% endif %}
-    </div>
-    <p>User: <a href="{% url 'users:profile' %}">{{ user.username }}</a></p>
-    <hr>
 
-    <p><a type="button" href="{% url 'users:addrecipe' %}">Добавить рецепт</a></p>
+{% endblock %}
+<!--    <div>-->
+<!--        <h2>Категории</h2>-->
+<!--        <ul>-->
+<!--            {% for i in cat %}-->
+<!--            <li>{{i}}</li>-->
+<!--            {% endfor %}-->
+<!--        </ul>-->
+<!--           <h2>Tэги</h2>-->
+<!--        <ul>-->
+<!--        {% for i in tags %}-->
+<!--        <li>{{i}}</li>-->
+<!--        {% endfor %}-->
+<!--            <hr>-->
+<!--</ul>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        {% if user.is_authenticated %}-->
+<!--        <p><a href="/users/logout/">Выйти</a> </p>-->
+<!--        {% else %}-->
+<!--        <p><a href="/users/login/">Войти на сайт</a> </p>-->
+<!--        {% endif %}-->
+<!--    </div>-->
+<!--    <p>User: <a href="{% url 'users:profile' %}">{{ user.username }}</a></p>-->
+<!--    <hr>-->
 
-    <div>
-        {% if not user.is_authenticated %}
-        <div>
-            <p><a href="{% url 'users:register' %}">Регистрация</a></p>
-        </div>
-        {% endif %}
-         <h1>Проверка работы шаблона</h1>
-        <h2>Рецепты</h2>
-        <ul class="text-primary">
-        {% for i in data %}
-            Название:
-            <li>
-                <div>
-                     <p>{{i.title}}</p>
-                <hr> Описание:
-                  <p>{{i.content}}</p>
-                <hr> Шаги приготовления:
-                    <p>{{i.steps}}</p>
-                    <hr>
-                    <hr> Время приготовления:
-                    <p>{{i.cooking_time}} минут</p>
-                    <hr>
-                </div></li>
+<!--    <p><a type="button" href="{% url 'users:addrecipe' %}">Добавить рецепт</a></p>-->
 
-        {% endfor %}
-        </ul>
+<!--    <div>-->
+<!--        {% if not user.is_authenticated %}-->
+<!--        <div>-->
+<!--            <p><a href="{% url 'users:register' %}">Регистрация</a></p>-->
+<!--        </div>-->
+<!--        {% endif %}-->
+<!--         <h1>Проверка работы шаблона</h1>-->
+<!--        <h2>Рецепты</h2>-->
+<!--        <ul class="text-primary">-->
+<!--        {% for i in data %}-->
+<!--            Название:-->
+<!--            <li>-->
+<!--                <div>-->
+<!--                     <p>{{i.title}}</p>-->
+<!--                <hr> Описание:-->
+<!--                  <p>{{i.content}}</p>-->
+<!--                <hr> Шаги приготовления:-->
+<!--                    <p>{{i.steps}}</p>-->
+<!--                    <hr>-->
+<!--                    <hr> Время приготовления:-->
+<!--                    <p>{{i.cooking_time}} минут</p>-->
+<!--                    <hr>-->
+<!--                </div></li>-->
+
+<!--        {% endfor %}-->
+<!--        </ul>-->
 
 
-    </div>
+<!--    </div>-->
 
 
 

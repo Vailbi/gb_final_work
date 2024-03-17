@@ -4,6 +4,6 @@
 <!--<li class="selected">{{cat.name}}</li>-->
 <!--{% else %}-->
 <!--        Временнно стоят заглушки на домашнюю страницу ({{ cat.get_absolut_url }})  -->
-<li><a href="{% url 'home'%}">{{cat.name}}</a></li>
+<li><a href="{{ cat.get_absolute_url }}">{{cat.name}}</a></li>
 {% endif %}
 {% endfor %}

@@ -1,3 +1,6 @@
+{% extends 'test.html' %}
+{% load recipes_tags %}
+{% block content %}
 <h1>Профиль</h1>
 
 <form method="post">
@@ -10,3 +13,4 @@
 
     <p ><button type="submit">Сохранить</button></p>
 </form>
+{% endblock %}

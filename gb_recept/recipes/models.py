@@ -45,6 +45,8 @@ class Recipes(models.Model):
         self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse('recipe', kwargs={'slug': self.slug})
 
 class Category(models.Model):
     class Meta:
@@ -61,6 +63,8 @@ class Category(models.Model):
         self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse('cat', kwargs={'slug': self.slug})
 
 class Tags(models.Model):
     class Meta:
@@ -77,5 +81,5 @@ class Tags(models.Model):
         self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
 
-    # def get_absolute_url(self):
-    #     return reverse('tag', kwargs={'tag_slug': self.slug})
+    def get_absolute_url(self):
+        return reverse('tags', kwargs={'slug': self.slug})

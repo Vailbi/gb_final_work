@@ -6,8 +6,7 @@ register = template.Library()
 
 
 menu = [{'title': "Главная страница", 'url_name': 'home'},
-        {'title': "Добавить статью", 'url_name': 'add_page'},
-        {'title': "Обратная связь", 'url_name': 'contact'},
+        {'title': "Добавить статью", 'url_name': 'users:addrecipe'},
         ]
 
 

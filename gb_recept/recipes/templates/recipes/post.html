@@ -1,4 +1,4 @@
-<!--{% extends 'base.html' %}-->
+{% extends 'test.html' %}
 {% load recipes_tags %}
 
 {% block breadcrumbs %}
@@ -9,8 +9,7 @@
     <ul class="tags-list">
         <li>Теги:</li>
         {% for t in tags %}
-            <li><a href="{% url 'home' %}">{{t.tag}}</a></li>
-<!--        {{t.get_absolute_url}}-->
+            <li><a href="{{t.get_absolute_url}}">{{t.name}}</a></li>
         {% endfor %}
     </ul>
     {% endif %}
@@ -18,8 +17,8 @@
 {% endblock %}
 
 {% block content %}
-<!--<h1>{{posts.title}}</h1>-->
-<!--Автор: {{posts.author.username|default:"неизвестен"}}-->
+<h1>{{posts.title}}</h1>
+Автор: {{posts.author.username|default:"неизвестен"}}
 {% if posts.photo %}
 <p><img class="img-article-left" src="{{ posts.photo.url }}" alt="img"></p>
 {% endif %}
@@ -28,7 +27,7 @@
 <hr>
 {{posts.steps|linebreaks}}
 <hr>
-Время приготовления: {{posts.cooking_time|linebreaks}} мин.
+Время приготовления: {{posts.cooking_time|default:"Не указано"}} / мин.
 
 <!--{% if user.is_authenticated and posts.author.username == user.username %}-->
 <!--<hr>-->
@@ -40,5 +39,5 @@
 <!--<p class="link-read-post"><a href="/update/{{ posts.slug }}/">Изменить пост</a></p>-->
 <!--<hr>-->
 <!--<p class="link-read-post"><a href="/del/{{ posts.slug }}/">Удалить пост</a></p>-->
-{% endif %}
+<!--{% endif %}-->
 {% endblock %}
